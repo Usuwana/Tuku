@@ -1,14 +1,14 @@
 import React from "react";
-import { View, StyleSheet, Image, Text, TouchableHighlight} from "react-native";
+import { View, StyleSheet, Image, Text, TouchableHighlight, Dimensions} from "react-native";
 import Navigator from  '../routes/homeStack'; 
 import Homestack from "../routes/homeStack";
 
 const handlePress = () => {
-    <Drawer.Navigator>
-    <Drawer.Screen name="Home" component={Home} />
-    <Drawer.Screen name="About" component={About} />
-    <Drawer.Screen name="Albums" component={Albums} />
-  </Drawer.Navigator>
+//     <Drawer.Navigator>
+//     <Drawer.Screen name="Home" component={Home} />
+//     <Drawer.Screen name="About" component={About} />
+//     <Drawer.Screen name="Albums" component={Albums} />
+//   </Drawer.Navigator>
 }
 
 export default function Header() {
@@ -21,12 +21,11 @@ export default function Header() {
             >
             <Image style={styles.menuimg} source={require('../assets/menu.png')} />
             </TouchableHighlight>
-
-             <Text style={styles.textmain}>Yessir</Text>
+             <Text style={styles.textmain}>HOME</Text>
          </View>
          
         
-        // <Navigator />
+        
     );
 
     
@@ -35,26 +34,28 @@ export default function Header() {
 const styles = StyleSheet.create({
     main: {
         backgroundColor: 'black',
-        maxHeight: 100,
-        minHeight: 80,
+        width: Dimensions.get('window').width,
+        maxHeight: Dimensions.get('window').height * 0.01,
+        minHeight: Dimensions.get('window').height * 0.09,
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
         paddingTop: 0,
-        borderBottomWidth: 1,
-        borderBottomColor: 'lightgray',
+        
+        
     },
     textmain: {
-        color: 'red',
-        paddingRight: 200,
+        color: 'white',
+        marginRight: Dimensions.get('window').width * 0.5,
         fontWeight: 'bold',
         fontSize: 24
     },
     menuimg: {
-        minWidth: 20,
-        maxWidth: 30,
-        minHeight: 20,
-        maxHeight: 30
+        minWidth: Dimensions.get('window').width * 0.01,
+        maxWidth: Dimensions.get('window').width * 0.08,
+        minHeight: Dimensions.get('window').height * 0.01,
+        maxHeight: Dimensions.get('window').height * 0.05,
+        
     },
     button: {
        
