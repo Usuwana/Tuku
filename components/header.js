@@ -21,7 +21,9 @@ export default function Header() {
             >
             <Image style={styles.menuimg} source={require('../assets/menu.png')} />
             </TouchableHighlight>
-             <Text style={styles.textmain}>HOME</Text>
+            <Text style={styles.textmain}>HOME</Text>
+        
+             
          </View>
          
         
@@ -38,15 +40,18 @@ const styles = StyleSheet.create({
         maxHeight: Dimensions.get('window').height * 0.01,
         minHeight: Dimensions.get('window').height * 0.09,
         flexDirection: 'row',
-        justifyContent: 'space-between',
+        //justifyContent: 'space-between',
         alignItems: 'center',
         paddingTop: 0,
         
         
     },
     textmain: {
+        textAlign: 'center',
+        justifyContent: 'center',
+        //alignSelf: 'center',
         color: 'white',
-        marginRight: Dimensions.get('window').width * 0.5,
+        //marginRight: Dimensions.get('window').width * 0.5,
         fontWeight: 'bold',
         fontSize: 24
     },
