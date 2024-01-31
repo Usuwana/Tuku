@@ -16,8 +16,12 @@ import Homemain from './components/homemain';
 
 
 
+
 export default function App() {
+  //fetchAlbums
+  //console.log("Testing the vibes")
   return (
+    //console.log("go there"),
     <SafeAreaView style={styles.top}>
       <ScrollView>
       <Header/>
