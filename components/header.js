@@ -11,28 +11,31 @@ const handlePress = () => {
 //   </Drawer.Navigator>
 }
 
-const artist_names = [];
+let album_names = [];
+let album_posters = [];
 let artist_results = [];
+let album_tracklist_links = [];
 let albums = [];
 
-const fetchAlbums = async () => {
-    const url = 'https://spotify23.p.rapidapi.com/search/?q=oliver%20mtukudzi&type=artists&offset=0&limit=10&numberOfTopResults=5';
+const fetchArtist = async () => {
+    const url = 'https://deezerdevs-deezer.p.rapidapi.com/search?q=oliver%20mtukudzi';
     const options = {
         method: 'GET',
         headers: {
             'X-RapidAPI-Key': 'e6a1fa6563msh824d08510a0316dp1a8e00jsn034c951916ee',
-            'X-RapidAPI-Host': 'spotify23.p.rapidapi.com'
+            'X-RapidAPI-Host': 'deezerdevs-deezer.p.rapidapi.com'
         }
-    };
+        }
+    
 
     try {
         const response = await fetch(url, options);
         const result = await response.json();
-        artist_results = result['artists']['items'];//['profile']['name']
-        //console.log(result);
+        artist_results = result['data'];//['profile']['name']
+        console.log(result);
         console.log(response.ok)
         //console.log(result.length)
-        console.log(artist_results.length)
+        //console.log(artist_results.length)
 
         let i = 0;
         //let j = 0;
@@ -41,21 +44,23 @@ const fetchAlbums = async () => {
         {
             //while (i < result.length)
             //{
-                while (i < artist_results.length)
-                {
-                    //console.log(artist_results[i]['data']['profile']['name'])
-                     if (artist_results[i]['data']['profile']['name'].includes('Oliver Mtukudzi')) //&& (artist_results[i]['data']['profile']['name'].includes('Oliver')))
-                     {
-                         console.log(artist_results[i]['data']['profile']['name'])
-                         artist_names.push(artist_results[i]['data']['profile']['name'])
-                     }
-                     else
-                     {
-                         console.log("Pakaipa boys")
-                     }
-                     i++;
-                    //j++;
-                }
+                 while (i < artist_results.length)
+                 {
+                     //console.log(artist_results[i]['data']['profile']['name'])
+                      if (artist_results[i]['data'][i]['artist']['name'].includes('Oliver Mtukudzi')) //&& (artist_results[i]['data']['profile']['name'].includes('Oliver')))
+                      {
+                          
+                          album_names.push(artist_results[i]['data'][i]['album']['title'])
+                          album_posters.push(artist_results[i]['data'][i]['album']['cover'])
+                          album_tracklist_links.push(artist_results[i]['data'][i]['album']['tracklist'])
+                      }
+                      else
+                      {
+                          console.log("Pakaipa boys")
+                      }
+                      i++;
+                //     //j++;
+                 }
             //}
         }
     } catch (error) {
@@ -68,7 +73,7 @@ export default function Header() {
          <View style={styles.main}>
             <TouchableHighlight
              style={styles.button}
-             onPress={fetchAlbums}
+             onPress={fetchArtist}
              underlayColor="black"
             >
             <Image style={styles.menuimg} source={require('../assets/menu.png')} />
