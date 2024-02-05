@@ -7,13 +7,15 @@ import {
   FlatList,
   Dimensions,
   SafeAreaView,
-  ScrollView
+  ScrollView,
+  Button
 } from 'react-native';
 import Header from '../components/header';
 import Homemain from '../components/homemain';
+import {fetchArtist} from "../data/data";
 
 export default function Home(){
-    //fetchAlbums
+  fetchArtist
   //console.log("Testing the vibes")
   return (
     //console.log("go there"),
