@@ -1,4 +1,4 @@
-Simple React Native app as I learn more about React Native and play around with it. Displays the biography of legendary Zimbabwean musician Oliver Mtukudzi as well as his Discography. The app makes use of the <a src="https://rapidapi.com/deezerdevs/api/deezer-1/">Deezer API</a> to obtain his albums.
+Simple React Native app as I learn more about React Native and play around with it. Displays the biography of legendary Zimbabwean musician Oliver Mtukudzi as well as his Discography. The app makes use of the https://rapidapi.com/deezerdevs/api/deezer-1/ Deezer API to obtain his albums.
 
 # Screenshots
 
