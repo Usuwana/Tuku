@@ -1,3 +1,10 @@
+Simple React Native app as I learn more about React Native and play around with it. Displays the biography of legendary Zimbabwean musician Oliver Mtukudzi as well as his Discography. The app makes use of the <a src"https://rapidapi.com/deezerdevs/api/deezer-1/">Deezer API</a> to obtain his albums.
+
+<img src="https://github.com/Usuwana/Tuku/blob/main/assets/one.png" width="250" height="500"> <img src="https://github.com/Usuwana/Tuku/blob/main/assets/two.png" width="250" height="500">
+
+
+
+
 This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
 
 # Getting Started
