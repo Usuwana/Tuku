@@ -1,4 +1,4 @@
-import { View, Text, FlatList, Button, ActivityIndicator } from "react-native";
+import { View, Text, FlatList, Button, ActivityIndicator, Image, StyleSheet, Dimensions } from "react-native";
 import {fetchArtist} from "../data/data";
 import { useState, useEffect } from "react";
 import {album_names} from "../data/data";
@@ -23,7 +23,8 @@ export default function Albums() {
       try {
           const response = await fetch(url, options);
           const result = await response.json();
-          setData(result.data);
+          const uniqueData = removeDuplicateIds(result.data);
+          setData(uniqueData);
           setIsLoading(false);
           console.log("lets go")
           //console.log(result.data);
@@ -39,21 +40,58 @@ export default function Albums() {
 
   
 
-  const renderItem = ({ item }) => (
-   <View>
-    <Text>{item.album.title}</Text>
-    <FlatList
-      data={item.album}
-      renderItem={({ item: subItem }) => (
-        <View>
-          <Text>{subItem.title}</Text>
-          {/* Add more components to display other properties */}
+  const renderItem = ({ item }) => {
+      if(item.artist.name.includes('Oliver Mtukudzi'))
+      {
+        return (
+          <View style={styles.card}>
+        <Image
+          source={{ uri: item.album.cover_big }}
+          style={styles.cardImage}
+        />
+        <View style={styles.cardContent}>
+          <Text style={styles.cardTitle}>{item.album.title}</Text>
         </View>
-      )}
-      keyExtractor={(subItem) => subItem.id.toString()}
-    />
-  </View>
-  );
+      </View>
+        )
+      }
+
+
+  }
+
+  const removeDuplicateIds = (apiData) => {
+    const uniqueIds = new Set();
+    return apiData.filter(item => {
+      if (!uniqueIds.has(item.album.id)) {
+        uniqueIds.add(item.album.id);
+        return true;
+      }
+      return false;
+    });
+  };
+   
+  //  <View>
+  //   <Text>{item.album.title}</Text>
+  //   <Image
+  //       source={{ uri: item.album.cover }}
+  //       style={{ width: 200, height: 200 }}
+  //     />
+  //   {/* <FlatList
+  //     data={item.album}
+  //     renderItem={({ item: subItem }) => (
+  //       //console.log(subItem.cover),
+  //       <View>
+  //         <Text>{subItem.title}</Text>
+  //         <Image
+  //       source={{ uri: subItem.cover }}
+  //       style={{ width: 200, height: 200 }}
+  //     />
+  //       </View>
+  //     )}
+  //     keyExtractor={(subItem) => subItem.id.toString()}
+  //   /> */}
+  // </View>
+  //);
 
   if (isLoading) {
     return <ActivityIndicator size="large" />;
@@ -64,12 +102,48 @@ export default function Albums() {
     <View>
      <FlatList
     data={data}
+    numColumns={2}
     renderItem={renderItem}
-    keyExtractor={(item) => item.album.id}
+    keyExtractor={(item) => item.album.id.toString()}
     /> 
     <Text>test</Text>
     {/* <Button title='press me' onPress={fetchData}/> */}
     </View>
     );
 }
+
+const windowWidth = Dimensions.get('window').width;
+const cardMargin = 10;
+
+const styles = StyleSheet.create({
+  flatListContainer: {
+    paddingHorizontal: cardMargin,
+  },
+  card: {
+    flex: 1,
+    backgroundColor: '#fff',
+    borderRadius: 8,
+    margin: cardMargin,
+    elevation: 3,
+  },
+  cardImage: {
+    width: '100%',
+    height: 200,
+    borderTopLeftRadius: 8,
+    borderTopRightRadius: 8,
+    resizeMode: 'cover',
+  },
+  cardContent: {
+    padding: 15,
+  },
+  cardTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 5,
+  },
+  cardDescription: {
+    fontSize: 16,
+    color: '#555',
+  },
+});
 
