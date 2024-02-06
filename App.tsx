@@ -16,16 +16,17 @@ import {
 
 import Home from './screens/home';
 import { NavigationContainer } from '@react-navigation/native';
-//import { createStackNavigator } from '@react-navigation/stack';
+import { createStackNavigator } from '@react-navigation/stack';
 import Albums from './screens/albums';
 //import { createDrawerNavigator } from '@react-navigation/drawer';
 //import Homestack from './routes/homeStack';
 //import DrawerNavigator from './routes/drawernavigator';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import Tracklist from './screens/tracklist';
 //import { Text } from 'react-native-reanimated/lib/typescript/Animated';
 
-//const Stack = createStackNavigator();
+const Stack = createStackNavigator();
 //const Drawer = createDrawerNavigator();
 const Tab = createBottomTabNavigator();
 
@@ -103,7 +104,14 @@ export default function App() {
       tabBarActiveTintColor: 'black',
       tabBarInactiveTintColor: 'white',
     }} />
+     <Tab.Screen
+          name="Tracklist"
+          component={Tracklist}
+          options={{ tabBarItemStyle: { display: 'none' } , headerShown: false,}}
+          
+        />
       </Tab.Navigator>
+      
       {/* <Homestack/> */}
       {/* <DrawerNavigator/> */}
       {/* <Drawer.Screen name="Home" component={Home} />

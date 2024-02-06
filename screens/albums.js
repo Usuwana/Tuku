@@ -1,15 +1,23 @@
-import { View, Text, FlatList, Button, ActivityIndicator, Image, StyleSheet, Dimensions } from "react-native";
+import { View, Text, FlatList, Button, ActivityIndicator, Image, StyleSheet, Dimensions, TouchableWithoutFeedback } from "react-native";
 import {fetchArtist} from "../data/data";
 import { useState, useEffect } from "react";
 import {album_names} from "../data/data";
+import Tracklist from "./tracklist";
 
-export default function Albums() {
+export default function Albums({navigation}) {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+
+  const handleItemClick = (item) => {
+    // Handle click event here
+    console.log('Item clicked:', item);
+    navigation.navigate('Tracklist', {params: item});
+  };
 
   useEffect(() => {
     // Call the function when the component mounts
     const fetchData = async() => {
+      //console.log("whaaaaaaatttt")
       const url = 'https://deezerdevs-deezer.p.rapidapi.com/search?q=oliver%20mtukudzi';
       const options = {
           method: 'GET',
@@ -23,10 +31,12 @@ export default function Albums() {
       try {
           const response = await fetch(url, options);
           const result = await response.json();
+          //console.log(result)
           const uniqueData = removeDuplicateIds(result.data);
           setData(uniqueData);
+          //console.log(uniqueData)
           setIsLoading(false);
-          console.log("lets go")
+          //console.log("lets go")
           //console.log(result.data);
           
       } catch (error) {
@@ -44,15 +54,19 @@ export default function Albums() {
       if(item.artist.name.includes('Oliver Mtukudzi'))
       {
         return (
-          <View style={styles.card}>
-        <Image
-          source={{ uri: item.album.cover_big }}
-          style={styles.cardImage}
-        />
-        <View style={styles.cardContent}>
-          <Text style={styles.cardTitle}>{item.album.title}</Text>
-        </View>
-      </View>
+      
+            <TouchableWithoutFeedback onPress= {() => handleItemClick(item.album.id)}>
+              <View style={styles.card} onPre>
+                <Image
+                  source={{ uri: item.album.cover_big }}
+                  style={styles.cardImage}
+                />
+                <View style={styles.cardContent}>
+                  <Text style={styles.cardTitle}>{item.album.title}</Text>
+                </View>
+              </View>
+            </TouchableWithoutFeedback>
+      
         )
       }
 
@@ -63,6 +77,7 @@ export default function Albums() {
     const uniqueIds = new Set();
     return apiData.filter(item => {
       if (!uniqueIds.has(item.album.id)) {
+        //console.log(item.album.id);
         uniqueIds.add(item.album.id);
         return true;
       }
