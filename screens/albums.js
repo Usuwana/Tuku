@@ -98,7 +98,7 @@ export default function Albums({navigation}) {
    
 
   if (isLoading) {
-    return <ActivityIndicator size="large" />;
+    return <ActivityIndicator size={100} style={styles.indicator} />;
   }
     
   return (
@@ -132,10 +132,10 @@ const styles = StyleSheet.create({
   },
   card: {
     flex: 1,
-    backgroundColor: '#fff',
     borderRadius: 8,
     margin: cardMargin,
     elevation: 3,
+    backgroundColor: 'dimgrey',
   },
   cardImage: {
     width: '100%',
@@ -143,9 +143,12 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 8,
     borderTopRightRadius: 8,
     resizeMode: 'cover',
+    backgroundColor: 'dimgrey',
   },
   cardContent: {
+    backgroundColor: 'dimgrey',
     padding: 15,
+    borderRadius: 8,
   },
   cardTitle: {
     fontSize: 18,
@@ -159,6 +162,9 @@ const styles = StyleSheet.create({
   page: {
     backgroundColor: 'black',
     ...StyleSheet.absoluteFillObject
+  },
+  indicator: {
+    flex: 1
   }
 });
 

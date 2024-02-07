@@ -81,7 +81,7 @@ export default function Tracklist(route) {
 
 
    if (isLoading) {
-     return <ActivityIndicator size="large" />;
+     return <ActivityIndicator size={100} style={styles.indicator} />;
    }
 
   return (
@@ -153,8 +153,8 @@ const styles = StyleSheet.create({
 	background: {
 		//backgroundColor: 'darkgrey'
 	  },
-	container: {
-		
-	}
+	  indicator: {
+		flex: 1
+	  }
 	  
   });

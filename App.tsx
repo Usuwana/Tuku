@@ -24,6 +24,7 @@ import Albums from './screens/albums';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Tracklist from './screens/tracklist';
+import Albumstack from './routes/albumStack';
 //import { Text } from 'react-native-reanimated/lib/typescript/Animated';
 
 const Stack = createStackNavigator();
@@ -75,13 +76,25 @@ export default function App() {
   return (
     <NavigationContainer>
        <Tab.Navigator
-      
+       screenOptions={{
+         
+        tabBarStyle: {
+          backgroundColor: 'black',  // Background color of the tab bar
+        },
+      }}
        >
        
         <Tab.Screen name="Home" component={Home} options={{
-          headerShown: false,
+          //headerShown: false,
       tabBarLabel: 'Home',
       tabBarActiveBackgroundColor: 'grey',
+      headerStyle: {
+        backgroundColor: 'black', // Set your desired background color
+        
+      },
+      headerTitleStyle: {
+        color: 'white', // Set the color of the tab bar label
+      },
       tabBarIcon: ({ color, size }) => (
         <Image
                 source={require('./assets/home.png')}
@@ -91,7 +104,7 @@ export default function App() {
       tabBarActiveTintColor: 'black',
       tabBarInactiveTintColor: 'white'
     }} />
-        <Tab.Screen name="Albums" component={Albums}  options={{
+        <Tab.Screen name="Albumstack" component={Albumstack}  options={{
           headerShown: false,
       tabBarLabel: 'Albums',
       tabBarActiveBackgroundColor: 'grey',
@@ -112,39 +125,7 @@ export default function App() {
         />
       </Tab.Navigator>
       
-      {/* <Homestack/> */}
-      {/* <DrawerNavigator/> */}
-      {/* <Drawer.Screen name="Home" component={Home} />
-      <Drawer.Screen name="Albums" component={Albums} /> */}
-      {/* <Drawer.Navigator
-        screenOptions={{
-          drawerStyle: {
-            backgroundColor: '#c6cbef', //Set Drawer background
-            width: 250, //Set Drawer width
-          },
-          headerStyle: {
-            backgroundColor: '#f4511e', //Set Header color
-          },
-          headerTintColor: '#fff', //Set Header text color
-          headerTitleStyle: {
-            fontWeight: 'bold', //Set Header text style
-          }
-        }}>
-        <Drawer.Screen
-          name="FirstPage"
-          options={{
-            drawerLabel: 'First page Option',
-            title: 'First Stack'
-          }}
-          component={FirstScreenStack} />
-        <Drawer.Screen
-          name="SecondPage"
-          options={{
-            drawerLabel: 'Second page Option',
-            title: 'Second Stack'
-          }}
-          component={SecondScreenStack} />
-      </Drawer.Navigator> */}
+     
   </NavigationContainer>
   );
   
