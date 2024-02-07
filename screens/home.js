@@ -11,6 +11,7 @@ import {
   Button
 } from 'react-native';
 import {fetchArtist} from "../data/data";
+import LinearGradient from 'react-native-linear-gradient';
 
 export default function Home(){
   fetchArtist
@@ -19,6 +20,12 @@ export default function Home(){
     //console.log("go there"),
     <SafeAreaView style={styles.top}>
       <ScrollView>
+      <LinearGradient
+      colors={['darkgrey', 'black',]}  // Specify your start and end colors
+      style={styles.container}
+	  start={{ x: 0, y: 0 }}
+	  end={{ x: 0, y: 0.7 }}
+	  > 
       {/* <Header/> */}
       <Image style={styles.homeimg} source={require('../assets/oliver-mtukudzi.jpg')}/>
       <Image style={styles.arrowimg} source={require('../assets/arrow.png')} />
@@ -42,6 +49,7 @@ export default function Home(){
         </Text>
 
       </View>
+      </LinearGradient>
       </ScrollView>
        
     </SafeAreaView>

@@ -97,8 +97,8 @@ export default function Albums({navigation}) {
       <LinearGradient
       colors={['darkgrey', 'black',]}  // Specify your start and end colors
       style={styles.container}
-	  //start={{ x: 0, y: 0 }}
-	  //end={{ x: 0, y: 1 }}
+	  start={{ x: 0, y: 0 }}
+	  end={{ x: 0, y: 0.7 }}
 	  >
      <FlatList
     data={data}

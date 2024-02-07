@@ -70,7 +70,7 @@ export default function Tracklist(route) {
       colors={['darkgrey', 'black',]}  // Specify your start and end colors
       style={styles.container}
 	  //start={{ x: 0, y: 0 }}
-	  //end={{ x: 0, y: 1 }}
+	  //end={{ x: 0, y: 0.9 }}
 	  >
 		<View style={styles.background}>
 		<Image
