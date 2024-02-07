@@ -1,49 +1,70 @@
 import { View, Text, FlatList, Button, ActivityIndicator, Image, StyleSheet, Dimensions, TouchableWithoutFeedback } from "react-native";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import LinearGradient from 'react-native-linear-gradient';
+import { useFocusEffect, useIsFocused } from '@react-navigation/native';
 
 export default function Tracklist(route) {
   
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const { params } = route;
+  const isFocused = useIsFocused();
   //console.log(route.route.params.params);
 
   useEffect(() => {
-	const fetchTracks = async() => {
-		const base = 'https://deezerdevs-deezer.p.rapidapi.com/album/';
-		const routee = route.route.params.params;
-		const url = `${base}${routee}`;
 
-
-	const options = {
-		method: 'GET',
-		headers: {
-			'X-RapidAPI-Key': 'e6a1fa6563msh824d08510a0316dp1a8e00jsn034c951916ee',
-			'X-RapidAPI-Host': 'deezerdevs-deezer.p.rapidapi.com'
-		}
-	};
+	if (isFocused) {
+		const fetchTracks = async() => {
+			const base = 'https://deezerdevs-deezer.p.rapidapi.com/album/';
+			const routee = route.route.params.params;
+			const url = `${base}${routee}`;
 	
-	try {
-		const response = await fetch(url, options);
-		const result = await response.json();
-		setData(result);
-		setIsLoading(false);
-		 //console.log("Working");
-		 //console.log(result);
-		// console.log(result.id);
-		// console.log(result.label);
-		// console.log(result.contributors);
-		//  console.log(result.tracks.data);
-		//console.log(result.tracks.data.map((track) => track.title.toString()));
-	} catch (error) {
-		console.error(error);
-		setIsLoading(false);
+	
+		const options = {
+			method: 'GET',
+			headers: {
+				'X-RapidAPI-Key': 'e6a1fa6563msh824d08510a0316dp1a8e00jsn034c951916ee',
+				'X-RapidAPI-Host': 'deezerdevs-deezer.p.rapidapi.com'
+			}
+		};
+		
+		try {
+			const response = await fetch(url, options);
+			const result = await response.json();
+			setData(result);
+			setIsLoading(false);
+			 //console.log("Working");
+			 //console.log(result);
+			// console.log(result.id);
+			// console.log(result.label);
+			// console.log(result.contributors);
+			//  console.log(result.tracks.data);
+			//console.log(result.tracks.data.map((track) => track.title.toString()));
+		} catch (error) {
+			console.error(error);
+			setIsLoading(false);
+		}
+		}
+	
+		fetchTracks();
 	}
-	}
+	return () => {
+		// Your cleanup code (if needed)
+		console.log('Screen will unmount or lose focus');
+		setData(); // Reset your state to the initial value
+		setIsLoading(true);
+	  };
+	
+  }, [params, isFocused]);
 
-	fetchTracks();
-  }, [params]);
+//   useFocusEffect(
+//     React.useCallback(() => {
+//       return () => {
+//         setData(''); // Reset your state to the initial value
+// 		setIsLoading(true);
+//       };
+//     }, [])
+//   );
 
   const renderItem = ({ item }) => {
 	

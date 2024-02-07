@@ -1,9 +1,10 @@
 import { View, Text, FlatList, Button, ActivityIndicator, Image, StyleSheet, Dimensions, TouchableWithoutFeedback } from "react-native";
 import {fetchArtist} from "../data/data";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import {album_names} from "../data/data";
 import Tracklist from "./tracklist";
 import LinearGradient from 'react-native-linear-gradient';
+import { useFocusEffect } from '@react-navigation/native';
 
 export default function Albums({navigation}) {
   const [data, setData] = useState([]);
@@ -48,6 +49,15 @@ export default function Albums({navigation}) {
 
     fetchData();
   }, []);
+
+  // useFocusEffect(
+  //   React.useCallback(() => {
+  //     return () => {
+  //       setData(''); // Reset your state to the initial value
+  //       setIsLoading(true);
+  //     };
+  //   }, [])
+  // );
 
   
 
