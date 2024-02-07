@@ -2,7 +2,8 @@ Simple React Native app as I learn more about React Native and play around with 
 
 # Screenshots
 
-<img src="https://github.com/Usuwana/Tuku/blob/main/assets/one.png" width="250" height="500"> <img src="https://github.com/Usuwana/Tuku/blob/main/assets/two.png" width="250" height="500">
+<img src="https://github.com/Usuwana/Tuku/blob/main/assets/one.jpeg" width="250" height="500"> <img src="https://github.com/Usuwana/Tuku/blob/main/assets/two.jpeg" width="250" height="500">
+<img src="https://github.com/Usuwana/Tuku/blob/main/assets/three.jpeg" width="250" height="500"> <img src="https://github.com/Usuwana/Tuku/blob/main/assets/four.jpeg" width="250" height="500">
 
 
 
