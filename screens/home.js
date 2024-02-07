@@ -8,13 +8,28 @@ import {
   Dimensions,
   SafeAreaView,
   ScrollView,
-  Button
+  Button,
+  TouchableWithoutFeedback,
+  Linking
 } from 'react-native';
 import {fetchArtist} from "../data/data";
 import LinearGradient from 'react-native-linear-gradient';
 
 export default function Home(){
   fetchArtist
+
+  const pressYT = () => {
+    Linking.openURL('https://www.youtube.com/channel/UC-K797_lLK1QjhkXsWzMXNQ');
+  };
+  const pressYTMusic = () => {
+    Linking.openURL('https://music.youtube.com/channel/UCVoeijjk8ewIn3CZag6MCiQ');
+  };
+  const pressSpotify = () => {
+    Linking.openURL('https://open.spotify.com/artist/0HC2dfJHpORLT21AxEiTXJ');
+  };
+  const pressApple = () => {
+    Linking.openURL('https://music.apple.com/us/artist/oliver-mtukudzi/485646791');
+  };
   //console.log("Testing the vibes")
   return (
     //console.log("go there"),
@@ -44,10 +59,26 @@ export default function Home(){
         <Text style={styles.aboutpara}>
         Internationally, Mtukudzi transcended the boundaries of Zimbabwean music, captivating audiences worldwide with his unique sound. He collaborated with artists from diverse backgrounds, contributing to the global appreciation of African music. His influence extended beyond the music industry, making him a respected ambassador for Zimbabwean culture on the international stage.
         </Text>
-        <Text style={[styles.aboutpara, {paddingBottom: 70}]}>
+        <Text style={[styles.aboutpara, {paddingBottom: 20}]}>
         Oliver Mtukudzi's legacy endures not only through his extensive discography but also through the countless lives he touched with his music. He passed away on January 23, 2019, leaving behind a profound impact on the world of music and a lasting imprint on the hearts of Zimbabweans, who continue to celebrate his contributions to their cultural heritage.
         </Text>
 
+      </View>
+      <View style={[styles.row, {paddingBottom: 40}]}>
+        <TouchableWithoutFeedback onPress={pressSpotify}>
+        <Image style={[styles.stream, {marginRight: 10}]} source={require('../assets/spotify.png')}/>
+        </TouchableWithoutFeedback>
+        <TouchableWithoutFeedback onPress={pressYT}>
+        <Image style={[styles.stream, {marginRight: 10}]} source={require('../assets/yt.png')}/>
+        </TouchableWithoutFeedback>
+        <TouchableWithoutFeedback onPress={pressYTMusic}>
+        <Image style={[styles.stream, {marginRight: 10}]} source={require('../assets/ytmusic.png')}/>
+        </TouchableWithoutFeedback>
+        <TouchableWithoutFeedback onPress={pressApple}>
+        <Image style={styles.stream} source={require('../assets/apple.png')}/>
+        </TouchableWithoutFeedback>
+        
+        
       </View>
       </LinearGradient>
       </ScrollView>
@@ -108,7 +139,7 @@ const styles = StyleSheet.create({
       //flex: 1,
          //alignItems: 'center',
         flexDirection: 'row',
-       backgroundColor: 'blue',
+       backgroundColor: 'black',
        opacity: 1,
       width: 500, // Set the desired width
       height: 500, // Set the desired height
@@ -116,5 +147,14 @@ const styles = StyleSheet.create({
       paddingStart: 0,
       paddingBottom: 0
       
+  },
+  row: {
+    flexDirection: 'row',
+    alignSelf: 'center',
+    
+  },
+  stream: {
+    width: 40,
+    height: 40,
   }
   });
