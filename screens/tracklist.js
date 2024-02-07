@@ -9,20 +9,11 @@ export default function Tracklist(route) {
   //console.log(route.route.params.params);
 
   useEffect(() => {
-	// console.log(params)
-	 //console.log("yes")
-	//  const base = 'https://deezerdevs-deezer.p.rapidapi.com/album/';
-	// 	const routee = route.route.params.params;
-	// 	const url = `${base}${routee}`;
-
-		//console.log(url);
 	const fetchTracks = async() => {
-		//console.log('ayyyyyeeee')
 		const base = 'https://deezerdevs-deezer.p.rapidapi.com/album/';
 		const routee = route.route.params.params;
 		const url = `${base}${routee}`;
 
-		//console.log(url);
 
 	const options = {
 		method: 'GET',
@@ -36,10 +27,14 @@ export default function Tracklist(route) {
 		const response = await fetch(url, options);
 		const result = await response.json();
 		setData(result);
-		//console.log(result.tracks.data)
 		setIsLoading(false);
-		//console.log("Working");
-		//console.log(result.tracks.data.title);
+		 console.log("Working");
+		 console.log(result);
+		// console.log(result.id);
+		// console.log(result.label);
+		// console.log(result.contributors);
+		//  console.log(result.tracks.data);
+		console.log(result.tracks.data.map((track) => track.title.toString()));
 	} catch (error) {
 		console.error(error);
 		setIsLoading(false);
@@ -49,22 +44,15 @@ export default function Tracklist(route) {
 	fetchTracks();
   }, [params]);
 
-  const renderItem = ({ route }) => {
-	//if(item.artist.name.includes('Oliver Mtukudzi'))
-	//{
-		//console.log(route.tracks.data)
-	  return (
+  const renderItem = ({ item }) => {
 	
-			  
-			  <View>
-				<Text>{route.tracks.data.title}</Text>
-			  </View>
+	  return (
+		<View>
+		<Text>{item.title}</Text>
+	  </View>
 
 	
 	  )
-	//}
-
-
 }  
 
 
@@ -76,15 +64,28 @@ export default function Tracklist(route) {
   return (
     
     <View>
-	<Text>test</Text>
+		<Image
+                  source={{ uri: data.cover_big }}
+                   style={styles.cardImage}
+                />
+				
      <FlatList
-    data={data}
-    //numColumns={2}
+    data={data.tracks.data}
     renderItem={renderItem}
-    keyExtractor={(route) => route.tracks.data.id.toString()}
+    keyExtractor={(item) => item.id.toString()}
+	// keyExtractor={(item) => {
+	// 	const flatTrackIds = item.tracks.data.map((track) => track.id.toString());
+	// 	return flatTrackIds.join('-'); // Combine track ids into a string for the key
+	//   }}
     />  
-    <Text>test</Text>
-    {/* <Button title='press me' onPress={fetchData}/> */}
+	
     </View>
     );
 }
+
+const styles = StyleSheet.create({
+	cardImage: {
+	  width: 200, // set your desired width
+	  height: 200, // set your desired height
+	},
+  });

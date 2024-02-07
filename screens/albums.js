@@ -85,28 +85,6 @@ export default function Albums({navigation}) {
     });
   };
    
-  //  <View>
-  //   <Text>{item.album.title}</Text>
-  //   <Image
-  //       source={{ uri: item.album.cover }}
-  //       style={{ width: 200, height: 200 }}
-  //     />
-  //   {/* <FlatList
-  //     data={item.album}
-  //     renderItem={({ item: subItem }) => (
-  //       //console.log(subItem.cover),
-  //       <View>
-  //         <Text>{subItem.title}</Text>
-  //         <Image
-  //       source={{ uri: subItem.cover }}
-  //       style={{ width: 200, height: 200 }}
-  //     />
-  //       </View>
-  //     )}
-  //     keyExtractor={(subItem) => subItem.id.toString()}
-  //   /> */}
-  // </View>
-  //);
 
   if (isLoading) {
     return <ActivityIndicator size="large" />;
