@@ -3,6 +3,7 @@ import {fetchArtist} from "../data/data";
 import { useState, useEffect } from "react";
 import {album_names} from "../data/data";
 import Tracklist from "./tracklist";
+import LinearGradient from 'react-native-linear-gradient';
 
 export default function Albums({navigation}) {
   const [data, setData] = useState([]);
@@ -92,7 +93,13 @@ export default function Albums({navigation}) {
     
   return (
     
-    <View>
+    <View style={styles.page}>
+      <LinearGradient
+      colors={['darkgrey', 'black',]}  // Specify your start and end colors
+      style={styles.container}
+	  //start={{ x: 0, y: 0 }}
+	  //end={{ x: 0, y: 1 }}
+	  >
      <FlatList
     data={data}
     numColumns={2}
@@ -101,6 +108,7 @@ export default function Albums({navigation}) {
     /> 
     <Text>test</Text>
     {/* <Button title='press me' onPress={fetchData}/> */}
+    </LinearGradient>
     </View>
     );
 }
@@ -138,5 +146,9 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: '#555',
   },
+  page: {
+    backgroundColor: 'black',
+    ...StyleSheet.absoluteFillObject
+  }
 });
 

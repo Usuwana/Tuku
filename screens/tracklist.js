@@ -1,5 +1,6 @@
 import { View, Text, FlatList, Button, ActivityIndicator, Image, StyleSheet, Dimensions, TouchableWithoutFeedback } from "react-native";
 import { useState, useEffect } from "react";
+import LinearGradient from 'react-native-linear-gradient';
 
 export default function Tracklist(route) {
   
@@ -28,13 +29,13 @@ export default function Tracklist(route) {
 		const result = await response.json();
 		setData(result);
 		setIsLoading(false);
-		 console.log("Working");
-		 console.log(result);
+		 //console.log("Working");
+		 //console.log(result);
 		// console.log(result.id);
 		// console.log(result.label);
 		// console.log(result.contributors);
 		//  console.log(result.tracks.data);
-		console.log(result.tracks.data.map((track) => track.title.toString()));
+		//console.log(result.tracks.data.map((track) => track.title.toString()));
 	} catch (error) {
 		console.error(error);
 		setIsLoading(false);
@@ -47,8 +48,9 @@ export default function Tracklist(route) {
   const renderItem = ({ item }) => {
 	
 	  return (
-		<View>
-		<Text>{item.title}</Text>
+		<View style={styles.card}>
+		<Text style={styles.text}>{item.title}</Text>
+		{/* <Text style={styles.duration}>{item.duration}</Text> */}
 	  </View>
 
 	
@@ -63,12 +65,22 @@ export default function Tracklist(route) {
 
   return (
     
-    <View>
+    <View style={styles.page}>
+		 <LinearGradient
+      colors={['darkgrey', 'black',]}  // Specify your start and end colors
+      style={styles.container}
+	  //start={{ x: 0, y: 0 }}
+	  //end={{ x: 0, y: 1 }}
+	  >
+		<View style={styles.background}>
 		<Image
                   source={{ uri: data.cover_big }}
                    style={styles.cardImage}
                 />
-				
+		</View>
+		<Text style={styles.title}>{data.title}</Text>
+		</LinearGradient>
+			
      <FlatList
     data={data.tracks.data}
     renderItem={renderItem}
@@ -80,12 +92,48 @@ export default function Tracklist(route) {
     />  
 	
     </View>
+	
     );
 }
 
+const cardMargin = 30;
+
 const styles = StyleSheet.create({
 	cardImage: {
-	  width: 200, // set your desired width
-	  height: 200, // set your desired height
+	  width: 300, // set your desired width
+	  height: 300, // set your desired height
+	  alignSelf: 'center',
+	  
 	},
+	page: {
+		flex: 1,
+		backgroundColor: 'black',
+		...StyleSheet.absoluteFillObject
+	},
+	title: {
+		textAlign: 'center',
+		fontWeight: 'bold',
+		fontSize: 24
+	},
+	text: {
+		marginStart: 10
+	},
+	duration: {
+		marginLeft: 'auto',
+	},
+	card: {
+		margin: 5,
+		backgroundColor: '#fff',
+		flexDirection: 'row',
+		elevation: 400,
+		borderRadius: 5,
+		height: 20
+	  },
+	background: {
+		//backgroundColor: 'darkgrey'
+	  },
+	container: {
+		
+	}
+	  
   });
